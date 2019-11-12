@@ -16,8 +16,6 @@ public class OfferServiceImpl implements OfferService {
     @Override
     public List<OfferEntity> getOffersList() {
         List<OfferEntity> offerList = repository.findAll();
-        System.out.println("adsadasd");
-       System.out.println(offerList);
         return offerList;
     }
 }
