@@ -1,7 +1,7 @@
 package com.socialicon.service.login;
 
-import com.socialicon.web.request.LoginRequest;
-import com.socialicon.web.response.LoginResponse;
+import com.socialicon.dto.request.LoginRequest;
+import com.socialicon.dto.response.LoginResponse;
 
 public interface LoginService {
 
