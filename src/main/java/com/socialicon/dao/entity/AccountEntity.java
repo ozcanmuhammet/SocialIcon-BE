@@ -10,6 +10,14 @@ import java.io.Serializable;
 @Data
 public class AccountEntity implements Serializable {
 
+    public AccountEntity(String email, String password, String createDate) {
+        this.email = email;
+        this.password = password;
+        this.createDate = createDate;
+    }
+
+    public AccountEntity() { }
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -22,4 +30,7 @@ public class AccountEntity implements Serializable {
 
     @Column(name="PHONE")
     private String phone;
+
+    @Column(name="CREATE_DATE")
+    private String createDate;
 }
