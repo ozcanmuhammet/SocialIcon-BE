@@ -54,7 +54,9 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http.csrf().disable()
                 // Don't authenticate this particular request
-            .authorizeRequests().antMatchers(Endpoints.LOGIN,Endpoints.SIGN,
+            .authorizeRequests().antMatchers(Endpoints.LOGIN,
+                Endpoints.SIGN,
+                Endpoints.VERIFY_EMAIL,
                 "/v2/api-docs",
                 "/configuration/ui",
                 "/swagger-resources/**",

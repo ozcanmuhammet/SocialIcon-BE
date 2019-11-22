@@ -8,6 +8,7 @@ import com.socialicon.dto.request.SignRequest;
 import com.socialicon.dto.response.SignResponse;
 import com.socialicon.util.classes.AuthUtil;
 import com.socialicon.util.classes.DateUtil;
+import com.socialicon.util.classes.EmailUtil;
 import com.socialicon.util.classes.StringUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -25,6 +26,9 @@ public class SignServiceImpl implements SignService{
 
     @Autowired
     private StringUtil stringUtil;
+
+    @Autowired
+    private EmailUtil emailUtil;
 
     @Autowired
     private AccountRepository accountRepository;
@@ -55,6 +59,10 @@ public class SignServiceImpl implements SignService{
                             signRequest.getFullname(),
                             stringUtil.CreateGuestName(signRequest.getFullname()))
                     );
+
+                    //TODO
+                    //String emailID = "firatipekk94@gmail.com";
+                    //emailUtil.sendEmail(emailID,"SimpleEmail Testing Subject", "SimpleEmail Testing Body");
                 }else{
                     // TODO
                     // Throw any exception
