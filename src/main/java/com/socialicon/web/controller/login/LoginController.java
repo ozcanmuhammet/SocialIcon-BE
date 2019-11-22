@@ -1,9 +1,9 @@
 package com.socialicon.web.controller.login;
 
 import com.socialicon.service.login.LoginService;
-import com.socialicon.util.constant.Endpoints;
+import com.socialicon.common.constant.Endpoints;
 import com.socialicon.web.model.LoginInput;
-import com.socialicon.dto.request.LoginRequest;
+import com.socialicon.web.request.LoginRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;

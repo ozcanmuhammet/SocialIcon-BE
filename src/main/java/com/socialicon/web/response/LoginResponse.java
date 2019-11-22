@@ -1,4 +1,4 @@
-package com.socialicon.dto.response;
+package com.socialicon.web.response;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

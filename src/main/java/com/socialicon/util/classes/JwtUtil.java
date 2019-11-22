@@ -1,6 +1,6 @@
 package com.socialicon.util.classes;
 
-import com.socialicon.dto.request.TokenRequest;
+import com.socialicon.web.request.TokenRequest;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
