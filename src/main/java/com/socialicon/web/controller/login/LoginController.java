@@ -19,6 +19,7 @@ public class LoginController {
     @Autowired
     private LoginService loginService;
 
+    @CrossOrigin
     @PostMapping(Endpoints.LOGIN)
     public ResponseEntity<?> login(@RequestBody LoginInput loginInput) {
         LoginRequest loginRequest = new LoginRequest(loginInput.getEmail(), loginInput.getPassword());

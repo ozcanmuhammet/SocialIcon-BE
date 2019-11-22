@@ -55,6 +55,8 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
         http.csrf().disable()
                 // Don't authenticate this particular request
             .authorizeRequests().antMatchers(Endpoints.LOGIN,
+                Endpoints.SIGN,
+                Endpoints.VERIFY_EMAIL,
                 "/v2/api-docs",
                 "/configuration/ui",
                 "/swagger-resources/**",
