@@ -1,6 +1,6 @@
 package com.socialicon.service.jwt;
 
-import com.socialicon.util.classes.JwtUtil;
+import com.socialicon.util.JwtUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;

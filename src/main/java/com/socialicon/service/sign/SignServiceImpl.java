@@ -1,15 +1,18 @@
 package com.socialicon.service.sign;
 
+import com.socialicon.common.enums.ErrorCodes;
+import com.socialicon.common.exceptions.EmailAlreadyExistException;
+import com.socialicon.common.exceptions.EmailNotValidException;
 import com.socialicon.dao.entity.AccountEntity;
 import com.socialicon.dao.entity.ProfileEntity;
 import com.socialicon.dao.repository.AccountRepository;
 import com.socialicon.dao.repository.ProfileRepository;
 import com.socialicon.dto.request.SignRequest;
 import com.socialicon.dto.response.SignResponse;
-import com.socialicon.util.classes.AuthUtil;
-import com.socialicon.util.classes.DateUtil;
-import com.socialicon.util.classes.EmailUtil;
-import com.socialicon.util.classes.StringUtil;
+import com.socialicon.util.AuthUtil;
+import com.socialicon.util.DateUtil;
+import com.socialicon.util.EmailUtil;
+import com.socialicon.util.StringUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
@@ -42,10 +45,8 @@ public class SignServiceImpl implements SignService{
         AccountEntity user = accountRepository.findByEmail(signRequest.getEmail());
         //Check the mail address has already been created.
         if(user != null){
-            // TODO
-            // Throw any exception
-            throw new Exception("1000");
-        }else{
+            throw new EmailAlreadyExistException(ErrorCodes.EMAIL_ALREADY_EXIST.getErrorMessage() + signRequest.getEmail());
+        } else{
             //Check email address validity
             if(authUtil.ValidateEmailAdress(signRequest.getEmail())){
                 user = accountRepository.save(new AccountEntity(signRequest.getEmail(),
@@ -53,7 +54,7 @@ public class SignServiceImpl implements SignService{
                         dateUtil.GetDateNow())
                 );
                 //If create account process successful
-                if(user != null){
+                if(user != null) {
                     ProfileEntity profile = new ProfileEntity();
                     profile = profileRepository.save(new ProfileEntity(user.getId(),
                             signRequest.getFullname(),
@@ -63,15 +64,13 @@ public class SignServiceImpl implements SignService{
                     //TODO
                     //String emailID = "firatipekk94@gmail.com";
                     //emailUtil.sendEmail(emailID,"SimpleEmail Testing Subject", "SimpleEmail Testing Body");
-                }else{
+                } else{
                     // TODO
                     // Throw any exception
                     throw new Exception("1002");
                 }
-            }else{
-                // TODO
-                // Throw any exception
-                throw new Exception("1001");
+            } else{
+                throw new EmailNotValidException(ErrorCodes.EMAIL_NOT_VALID.getErrorMessage() + signRequest.getEmail());
             }
         }
 

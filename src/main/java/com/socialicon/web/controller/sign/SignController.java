@@ -2,7 +2,7 @@ package com.socialicon.web.controller.sign;
 
 import com.socialicon.dto.request.SignRequest;
 import com.socialicon.service.sign.SignService;
-import com.socialicon.util.constant.Endpoints;
+import com.socialicon.common.constant.Endpoints;
 import com.socialicon.web.model.SignInput;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;

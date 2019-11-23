@@ -1,4 +1,4 @@
-package com.socialicon.util.classes;
+package com.socialicon.util;
 
 import org.springframework.security.crypto.bcrypt.BCrypt;
 import org.springframework.stereotype.Component;

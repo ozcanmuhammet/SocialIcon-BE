@@ -2,13 +2,12 @@ package com.socialicon.service.login;
 
 import com.socialicon.dao.entity.AccountEntity;
 import com.socialicon.dao.repository.AccountRepository;
-import com.socialicon.web.request.TokenRequest;
-import com.socialicon.util.classes.JwtUtil;
-import com.socialicon.web.request.LoginRequest;
-import com.socialicon.web.response.LoginResponse;
+import com.socialicon.dto.request.TokenRequest;
+import com.socialicon.util.JwtUtil;
+import com.socialicon.dto.request.LoginRequest;
+import com.socialicon.dto.response.LoginResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.stereotype.Service;
 

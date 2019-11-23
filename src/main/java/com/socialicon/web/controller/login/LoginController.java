@@ -3,7 +3,7 @@ package com.socialicon.web.controller.login;
 import com.socialicon.service.login.LoginService;
 import com.socialicon.common.constant.Endpoints;
 import com.socialicon.web.model.LoginInput;
-import com.socialicon.web.request.LoginRequest;
+import com.socialicon.dto.request.LoginRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -19,7 +19,6 @@ public class LoginController {
     @Autowired
     private LoginService loginService;
 
-    @CrossOrigin
     @PostMapping(Endpoints.LOGIN)
     public ResponseEntity<?> login(@RequestBody LoginInput loginInput) {
         LoginRequest loginRequest = new LoginRequest(loginInput.getEmail(), loginInput.getPassword());

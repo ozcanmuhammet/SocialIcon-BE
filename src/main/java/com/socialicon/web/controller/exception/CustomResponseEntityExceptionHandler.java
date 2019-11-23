@@ -1,6 +1,8 @@
 package com.socialicon.web.controller.exception;
 
 import com.socialicon.common.enums.ErrorCodes;
+import com.socialicon.common.exceptions.EmailAlreadyExistException;
+import com.socialicon.common.exceptions.EmailNotValidException;
 import com.socialicon.dto.ExceptionDTO;
 import com.socialicon.common.exceptions.UserNotFoundException;
 import org.springframework.http.HttpStatus;
@@ -17,9 +19,21 @@ import java.util.Date;
 @RestController
 public class CustomResponseEntityExceptionHandler extends ResponseEntityExceptionHandler {
 
-    @ExceptionHandler
+    @ExceptionHandler(UserNotFoundException.class)
     public final ResponseEntity<Object> handleUserNotFoundException(UserNotFoundException ex, WebRequest request) {
         ExceptionDTO exception = new ExceptionDTO(new Date(), ErrorCodes.USER_NOT_FOUND.getErrorCode(), ex.getMessage());
         return new ResponseEntity<>(exception, HttpStatus.NOT_FOUND);
+    }
+
+    @ExceptionHandler(EmailAlreadyExistException.class)
+    public final ResponseEntity<Object> handleEmailAlreadyExistException(EmailAlreadyExistException ex, WebRequest request) {
+        ExceptionDTO exception = new ExceptionDTO(new Date(), ErrorCodes.EMAIL_ALREADY_EXIST.getErrorCode(), ex.getMessage());
+        return new ResponseEntity<>(exception, HttpStatus.CONFLICT);
+    }
+
+    @ExceptionHandler(EmailNotValidException.class)
+    public final ResponseEntity<Object> handleEmailNotValidException(EmailNotValidException ex, WebRequest request) {
+        ExceptionDTO exception = new ExceptionDTO(new Date(), ErrorCodes.EMAIL_NOT_VALID.getErrorCode(), ex.getMessage());
+        return new ResponseEntity<>(exception, HttpStatus.BAD_REQUEST);
     }
 }

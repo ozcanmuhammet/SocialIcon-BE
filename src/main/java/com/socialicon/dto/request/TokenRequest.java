@@ -1,4 +1,4 @@
-package com.socialicon.web.request;
+package com.socialicon.dto.request;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
