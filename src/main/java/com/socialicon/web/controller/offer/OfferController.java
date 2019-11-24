@@ -3,10 +3,11 @@ package com.socialicon.web.controller.offer;
 import com.socialicon.dao.entity.OfferEntity;
 import com.socialicon.service.offer.OfferService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import java.net.URI;
 import java.util.List;
 import java.util.Optional;
 
@@ -15,6 +16,15 @@ public class OfferController {
 
     @Autowired
     private OfferService offerService;
+
+    @PostMapping("/offers")
+    public ResponseEntity<Object> createOffer(@RequestBody OfferEntity offer) {
+        offerService.createOffer(offer);
+
+        URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{offerId}").buildAndExpand(offer.getOfferId()).toUri();
+
+        return ResponseEntity.created(location).build();
+    }
 
     @GetMapping("/users/{userId}/offers")
     public List<OfferEntity> getOfferList(@PathVariable Long userId) {

@@ -1,6 +1,7 @@
 package com.socialicon.service.offer;
 
 import com.socialicon.common.enums.ErrorCodes;
+import com.socialicon.common.exceptions.InvalidUserException;
 import com.socialicon.common.exceptions.OfferNotFoundException;
 import com.socialicon.common.exceptions.UserNotFoundException;
 import com.socialicon.dao.entity.OfferEntity;
@@ -8,8 +9,11 @@ import com.socialicon.dao.entity.UserEntity;
 import com.socialicon.dao.repository.OfferRepository;
 import com.socialicon.dao.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import java.net.URI;
 import java.util.List;
 import java.util.Optional;
 
@@ -40,6 +44,22 @@ public class OfferServiceImpl implements OfferService {
             throw new OfferNotFoundException(ErrorCodes.OFFER_NOT_FOUND .getErrorMessage() + offerId);
         }
         return offer;
+    }
+
+    @Override
+    public void createOffer(OfferEntity offer) {
+        if(offer == null || offer.getUserId() == null) {
+            throw new InvalidUserException(ErrorCodes.INVALID_USER.getErrorMessage() );
+        }
+
+        Optional<UserEntity> user = userRepository.findById(offer.getUserId());
+
+        if(user==null){
+            throw new UserNotFoundException(ErrorCodes.USER_NOT_FOUND.getErrorMessage() + offer.getUserId());
+        }
+
+        offerRepository.save(offer);
+
     }
 
 
