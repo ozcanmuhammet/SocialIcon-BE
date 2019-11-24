@@ -1,4 +1,4 @@
-package com.socialicon.util.classes;
+package com.socialicon.util;
 
 import com.socialicon.dto.request.TokenRequest;
 import io.jsonwebtoken.Claims;

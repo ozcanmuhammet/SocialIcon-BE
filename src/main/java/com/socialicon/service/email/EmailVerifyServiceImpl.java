@@ -1,11 +1,13 @@
 package com.socialicon.service.email;
 
-import com.socialicon.dao.entity.AccountEntity;
-import com.socialicon.dao.repository.AccountRepository;
+import com.socialicon.common.enums.ErrorCodes;
+import com.socialicon.common.exceptions.EmailAlreadyExistException;
+import com.socialicon.common.exceptions.EmailNotValidException;
+import com.socialicon.dao.entity.UserEntity;
+import com.socialicon.dao.repository.UserRepository;
 import com.socialicon.dto.request.EmailVerifyRequest;
 import com.socialicon.dto.response.EmailVerifyResponse;
-import com.socialicon.dto.response.SignResponse;
-import com.socialicon.util.classes.AuthUtil;
+import com.socialicon.util.AuthUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -13,24 +15,20 @@ import org.springframework.stereotype.Service;
 public class EmailVerifyServiceImpl implements EmailVerifyService{
 
     @Autowired
-    private AccountRepository accountRepository;
+    private UserRepository userRepository;
 
     @Autowired
     private AuthUtil authUtil;
 
     @Override
-    public EmailVerifyResponse verifyEmail(EmailVerifyRequest emailVerifyRequest) throws Exception {
-        AccountEntity user = accountRepository.findByEmail(emailVerifyRequest.getEmail());
+    public EmailVerifyResponse verifyEmail(EmailVerifyRequest emailVerifyRequest) {
+        UserEntity user = userRepository.findByEmail(emailVerifyRequest.getEmail());
         //Check the mail address has already been created.
         if(user != null){
-            // TODO
-            // Throw any exception
-            throw new Exception("1000");
+            throw new EmailAlreadyExistException(ErrorCodes.EMAIL_ALREADY_EXIST.getErrorMessage() + emailVerifyRequest.getEmail());
         }else{
             if(!authUtil.ValidateEmailAdress(emailVerifyRequest.getEmail())){
-                // TODO
-                // Throw any exception
-                throw new Exception("1001");
+                throw new EmailNotValidException(ErrorCodes.EMAIL_NOT_VALID.getErrorMessage() + emailVerifyRequest.getEmail());
             }
             return new EmailVerifyResponse(true);
         }

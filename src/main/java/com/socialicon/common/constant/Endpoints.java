@@ -1,4 +1,4 @@
-package com.socialicon.util.constant;
+package com.socialicon.common.constant;
 
 import lombok.experimental.UtilityClass;
 

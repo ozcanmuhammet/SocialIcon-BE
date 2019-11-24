@@ -1,9 +1,9 @@
 package com.socialicon.service.login;
 
-import com.socialicon.dao.entity.AccountEntity;
-import com.socialicon.dao.repository.AccountRepository;
+import com.socialicon.dao.entity.UserEntity;
+import com.socialicon.dao.repository.UserRepository;
 import com.socialicon.dto.request.TokenRequest;
-import com.socialicon.util.classes.JwtUtil;
+import com.socialicon.util.JwtUtil;
 import com.socialicon.dto.request.LoginRequest;
 import com.socialicon.dto.response.LoginResponse;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,20 +21,14 @@ public class LoginServiceImpl implements LoginService {
     private AuthenticationManager authenticationManager;
 
     @Autowired
-    private AccountRepository accountRepository;
+    private UserRepository userRepository;
 
     @Override
     public LoginResponse login(LoginRequest loginRequest) {
-
-        // TODO
-        // Login Request null and empty control
-        //
-        // User control
-        AccountEntity user = accountRepository.findByEmail(loginRequest.getEmail());
-        // blocked or inactive user control
-
         authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(loginRequest.getEmail(),
-                    loginRequest.getPassword()));
+                loginRequest.getPassword()));
+
+        UserEntity user = userRepository.findByEmail(loginRequest.getEmail());
         TokenRequest tokenRequest = new TokenRequest();
         tokenRequest.setUserId(user.getId());
         tokenRequest.setEmail(user.getEmail());

@@ -2,7 +2,7 @@ package com.socialicon.web.controller.email;
 
 import com.socialicon.dto.request.EmailVerifyRequest;
 import com.socialicon.service.email.EmailVerifyService;
-import com.socialicon.util.constant.Endpoints;
+import com.socialicon.common.constant.Endpoints;
 import com.socialicon.web.model.EmailInput;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;

@@ -1,7 +1,7 @@
 package com.socialicon.web.controller.login;
 
 import com.socialicon.service.login.LoginService;
-import com.socialicon.util.constant.Endpoints;
+import com.socialicon.common.constant.Endpoints;
 import com.socialicon.web.model.LoginInput;
 import com.socialicon.dto.request.LoginRequest;
 
@@ -19,7 +19,6 @@ public class LoginController {
     @Autowired
     private LoginService loginService;
 
-    @CrossOrigin
     @PostMapping(Endpoints.LOGIN)
     public ResponseEntity<?> login(@RequestBody LoginInput loginInput) {
         LoginRequest loginRequest = new LoginRequest(loginInput.getEmail(), loginInput.getPassword());
