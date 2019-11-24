@@ -1,7 +1,7 @@
 package com.socialicon.service.login;
 
-import com.socialicon.dao.entity.AccountEntity;
-import com.socialicon.dao.repository.AccountRepository;
+import com.socialicon.dao.entity.UserEntity;
+import com.socialicon.dao.repository.UserRepository;
 import com.socialicon.dto.request.TokenRequest;
 import com.socialicon.util.JwtUtil;
 import com.socialicon.dto.request.LoginRequest;
@@ -21,14 +21,14 @@ public class LoginServiceImpl implements LoginService {
     private AuthenticationManager authenticationManager;
 
     @Autowired
-    private AccountRepository accountRepository;
+    private UserRepository userRepository;
 
     @Override
     public LoginResponse login(LoginRequest loginRequest) {
         authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(loginRequest.getEmail(),
                 loginRequest.getPassword()));
 
-        AccountEntity user = accountRepository.findByEmail(loginRequest.getEmail());
+        UserEntity user = userRepository.findByEmail(loginRequest.getEmail());
         TokenRequest tokenRequest = new TokenRequest();
         tokenRequest.setUserId(user.getId());
         tokenRequest.setEmail(user.getEmail());

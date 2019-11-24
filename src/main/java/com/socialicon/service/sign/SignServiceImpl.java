@@ -3,9 +3,9 @@ package com.socialicon.service.sign;
 import com.socialicon.common.enums.ErrorCodes;
 import com.socialicon.common.exceptions.EmailAlreadyExistException;
 import com.socialicon.common.exceptions.EmailNotValidException;
-import com.socialicon.dao.entity.AccountEntity;
+import com.socialicon.dao.entity.UserEntity;
 import com.socialicon.dao.entity.ProfileEntity;
-import com.socialicon.dao.repository.AccountRepository;
+import com.socialicon.dao.repository.UserRepository;
 import com.socialicon.dao.repository.ProfileRepository;
 import com.socialicon.dto.request.SignRequest;
 import com.socialicon.dto.response.SignResponse;
@@ -34,7 +34,7 @@ public class SignServiceImpl implements SignService{
     private EmailUtil emailUtil;
 
     @Autowired
-    private AccountRepository accountRepository;
+    private UserRepository userRepository;
 
     @Autowired
     private ProfileRepository profileRepository;
@@ -42,14 +42,14 @@ public class SignServiceImpl implements SignService{
     @Override
     @Transactional(propagation = Propagation.REQUIRED)
     public SignResponse sign(SignRequest signRequest) throws Exception {
-        AccountEntity user = accountRepository.findByEmail(signRequest.getEmail());
+        UserEntity user = userRepository.findByEmail(signRequest.getEmail());
         //Check the mail address has already been created.
         if(user != null){
             throw new EmailAlreadyExistException(ErrorCodes.EMAIL_ALREADY_EXIST.getErrorMessage() + signRequest.getEmail());
         } else{
             //Check email address validity
             if(authUtil.ValidateEmailAdress(signRequest.getEmail())){
-                user = accountRepository.save(new AccountEntity(signRequest.getEmail(),
+                user = userRepository.save(new UserEntity(signRequest.getEmail(),
                         authUtil.CryptPassword(signRequest.getPassword()),
                         dateUtil.GetDateNow())
                 );

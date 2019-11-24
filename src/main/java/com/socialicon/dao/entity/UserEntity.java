@@ -6,17 +6,17 @@ import javax.persistence.*;
 import java.io.Serializable;
 
 @Entity
-@Table(name="ACCOUNT")
+@Table(name="USERS")
 @Data
-public class AccountEntity implements Serializable {
+public class UserEntity implements Serializable {
 
-    public AccountEntity(String email, String password, String createDate) {
+    public UserEntity(String email, String password, String createDate) {
         this.email = email;
         this.password = password;
         this.createDate = createDate;
     }
 
-    public AccountEntity() { }
+    public UserEntity() { }
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
