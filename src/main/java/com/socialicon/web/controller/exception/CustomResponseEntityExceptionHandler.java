@@ -3,6 +3,7 @@ package com.socialicon.web.controller.exception;
 import com.socialicon.common.enums.ErrorCodes;
 import com.socialicon.common.exceptions.EmailAlreadyExistException;
 import com.socialicon.common.exceptions.EmailNotValidException;
+import com.socialicon.common.exceptions.OfferNotFoundException;
 import com.socialicon.dto.ExceptionDTO;
 import com.socialicon.common.exceptions.UserNotFoundException;
 import org.springframework.http.HttpStatus;
@@ -18,6 +19,12 @@ import java.util.Date;
 @ControllerAdvice
 @RestController
 public class CustomResponseEntityExceptionHandler extends ResponseEntityExceptionHandler {
+
+    @ExceptionHandler(OfferNotFoundException.class)
+    public final ResponseEntity<Object> handleUserNotFoundException(OfferNotFoundException ex, WebRequest request) {
+        ExceptionDTO exception = new ExceptionDTO(new Date(), ErrorCodes.OFFER_NOT_FOUND.getErrorCode(), ex.getMessage());
+        return new ResponseEntity<>(exception, HttpStatus.NOT_FOUND);
+    }
 
     @ExceptionHandler(UserNotFoundException.class)
     public final ResponseEntity<Object> handleUserNotFoundException(UserNotFoundException ex, WebRequest request) {
