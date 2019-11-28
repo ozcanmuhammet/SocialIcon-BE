@@ -1,9 +1,10 @@
 package com.socialicon.config;
 
-import com.socialicon.service.jwt.JwtUserDetailsService;
-import com.socialicon.common.constant.Endpoints;
-import com.socialicon.service.jwt.JwtAuthenticationEntryPoint;
-import com.socialicon.service.jwt.JwtRequestFilter;
+import com.socialicon.common.constants.Endpoints;
+import com.socialicon.impl.jwt.JwtAuthenticationEntryPoint;
+import com.socialicon.impl.jwt.JwtRequestFilter;
+import com.socialicon.impl.jwt.JwtUserDetailsService;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
